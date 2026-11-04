@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Varshitha Darmini – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF8F4; --ink: #18160F; --ink-muted: #5A5750; --ink-faint: #9B9891;
+    --accent: #1D9E75; --accent-light: #E1F5EE; --accent-dark: #085041;
+    --gold: #BA7517; --gold-light: #FAEEDA;
+    --border: rgba(24,22,15,0.1); --border-strong: rgba(24,22,15,0.2);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif; --mono: 'DM Mono', monospace;
+    --radius: 12px; --radius-sm: 6px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1.5rem, 5vw, 4rem); height: 64px;
+    background: rgba(250,248,244,0.93); backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.875rem; color: var(--ink-muted); text-decoration: none; font-weight: 400; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr; gap: 0; padding-top: 64px; }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: clamp(3rem,8vw,6rem) clamp(1.5rem,5vw,5rem);
+}
+  .hero-eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+  .hero-name { font-family: var(--serif); font-size: clamp(3rem,6vw,5.5rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 1rem; }
+  .hero-name em { font-style: italic; color: var(--accent-dark); }
+  .hero-tagline {
+    font-size: 1.0625rem;
+    color: var(--ink-muted);
+    max-width: 75ch;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.85;
+}
+  .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; background: var(--ink); color: var(--cream); font-family: var(--sans); font-size: 0.875rem; font-weight: 500; text-decoration: none; border-radius: var(--radius-sm); transition: background 0.2s, transform 0.15s; letter-spacing: 0.01em; }
+  .btn-primary:hover { background: #2c2a22; transform: translateY(-1px); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; background: transparent; color: var(--ink); font-family: var(--sans); font-size: 0.875rem; font-weight: 500; text-decoration: none; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); transition: border-color 0.2s, transform 0.15s; }
+  .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
+  .hero-stats { display: flex; gap: 2.5rem; padding-top: 2rem; border-top: 0.5px solid var(--border); }
+  .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--ink); letter-spacing: -0.04em; line-height: 1; display: block; }
+  .stat-label { font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.07em; text-transform: uppercase; font-family: var(--mono); }
+  .hero-right { position: relative; overflow: hidden; background: var(--accent-light); }
+  .hero-img-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .hero-img-wrap img { width:380px; height:380px; object-fit:cover; object-position:center top; border-radius:24px; box-shadow:0 20px 50px rgba(0,0,0,0.15); }
+  .hero-right-overlay { position: absolute; top: 2rem; right: 2rem; background: rgba(250,248,244,0.92); backdrop-filter: blur(8px); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; font-size: 0.75rem; }
+  .cgpa-label { font-family: var(--mono); color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+  .cgpa-val { font-family: var(--serif); font-size: 2rem; color: var(--accent-dark); letter-spacing: -0.04em; line-height: 1; }
+  .cgpa-sub { color: var(--ink-muted); font-size: 0.7rem; margin-top: 0.25rem; }
+  section { padding: clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem); }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border-strong); max-width: 4rem; }
+  .section-title { font-family: var(--serif); font-size: clamp(2rem,4vw,3rem); letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
+  .section-title em { font-style: italic; color: var(--accent-dark); }
+  .skills-section { background: #F4F1EB; }
+  .skills-outer { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+  .skills-intro p { color: var(--ink-muted); line-height: 1.9; font-size: 1rem; font-weight: 300; }
+  .skills-cluster { display: flex; flex-direction: column; gap: 1.5rem; }
+  .skill-group-title { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-faint); margin-bottom: 0.6rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag { font-size: 0.8rem; font-weight: 400; padding: 0.3rem 0.75rem; border-radius: 4px; border: 0.5px solid var(--border-strong); color: var(--ink-muted); background: transparent; font-family: var(--mono); transition: border-color 0.2s, color 0.2s, background 0.2s; cursor: default; }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent-dark); background: var(--accent-light); }
+  .skill-tag.accent { background: var(--accent-light); border-color: var(--accent); color: var(--accent-dark); }
+  .exp-section { background: var(--ink); }
+  .exp-section .section-eyebrow { color: #5DCAA5; }
+  .exp-section .section-eyebrow::after { background: rgba(255,255,255,0.15); }
+  .exp-section .section-title { color: var(--cream); }
+  .exp-section .section-title em { color: #5DCAA5; }
+  .exp-card { border: 0.5px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 2rem 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
+  .exp-role { font-family: var(--serif); font-size: 1.5rem; color: var(--cream); letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+  .exp-org { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: #5DCAA5; margin-bottom: 1.25rem; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li { font-size: 0.9375rem; color: rgba(250,248,244,0.65); padding: 0.5rem 0 0.5rem 1.25rem; position: relative; border-bottom: 0.5px solid rgba(255,255,255,0.06); line-height: 1.7; }
+  .exp-bullets li:last-child { border-bottom: none; }
+  .exp-bullets li::before { content: ''; position: absolute; left: 0; top: 0.95rem; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .exp-period { font-family: var(--mono); font-size: 0.7rem; color: rgba(250,248,244,0.35); letter-spacing: 0.1em; text-align: right; white-space: nowrap; padding-top: 0.35rem; }
+  .edu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+  .edu-card { border: 0.5px solid var(--border-strong); border-radius: var(--radius); padding: 1.75rem 1.5rem; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+  .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .edu-card.primary::before { background: var(--accent); }
+  .edu-card.secondary::before { background: var(--gold); }
+  .edu-card.tertiary::before { background: var(--ink-muted); }
+  .edu-card:hover { transform: translateY(-2px); }
+  .edu-period { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 0.75rem; }
+  .edu-inst { font-family: var(--serif); font-size: 1.25rem; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.25rem; line-height: 1.2; }
+  .edu-degree { font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 1rem; line-height: 1.5; }
+  .edu-badge { display: inline-block; padding: 0.3rem 0.75rem; border-radius: 4px; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
+  .edu-badge.green { background: var(--accent-light); color: var(--accent-dark); }
+  .edu-badge.gold { background: var(--gold-light); color: #633806; }
+  .edu-badge.gray { background: #F1EFE8; color: #444441; }
+  .projects-section { background: #F4F1EB; }
+  .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+  .project-card { background: var(--cream); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.75rem; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+  .project-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(24,22,15,0.06); }
+  .project-number { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 1rem; }
+  .project-tech-cluster { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; }
+  .project-tech { font-family: var(--mono); font-size: 0.67rem; padding: 0.2rem 0.5rem; border-radius: 3px; background: var(--accent-light); color: var(--accent-dark); letter-spacing: 0.04em; }
+  .project-tech.ml { background: var(--gold-light); color: #633806; }
+  .project-tech.web { background: #E6F1FB; color: #0C447C; }
+  .project-tech.hpc { background: #FBEAF0; color: #72243E; }
+  .project-tech.health { background: #EAF3DE; color: #27500A; }
+  .project-name { font-family: var(--serif); font-size: 1.2rem; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.75rem; line-height: 1.25; }
+  .project-desc { font-size: 0.865rem; color: var(--ink-muted); line-height: 1.8; flex: 1; margin-bottom: 1.25rem; }
+  .project-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); text-decoration: none; transition: gap 0.2s; }
+  .project-link:hover { gap: 0.65rem; }
+  .project-link svg { width: 14px; height: 14px; }
+  .ach-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+  .ach-card { border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+  .ach-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .ach-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1rem; }
+  .ach-icon.gold { background: var(--gold-light); }
+  .ach-icon.green { background: var(--accent-light); }
+  .ach-icon.blue { background: #E6F1FB; }
+  .ach-title { font-weight: 500; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.4; }
+  .ach-sub { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.6; }
+  .contact-section { background: var(--ink); text-align: center; }
+  .contact-section .section-title { color: var(--cream); }
+  .contact-section .section-title em { color: #5DCAA5; }
+  .contact-section .section-eyebrow { color: #5DCAA5; justify-content: center; }
+  .contact-section .section-eyebrow::after { display: none; }
+  .contact-section .section-eyebrow::before { content: ''; width: 4rem; height: 1px; background: rgba(255,255,255,0.15); }
+  .contact-sub { font-size: 1rem; color: rgba(250,248,244,0.5); max-width: 42ch; margin: 1rem auto 2.5rem; font-weight: 300; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border: 0.5px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); color: rgba(250,248,244,0.75); font-size: 0.875rem; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+  .contact-link:hover { border-color: rgba(255,255,255,0.4); color: var(--cream); }
+  .contact-link svg { width: 16px; height: 16px; opacity: 0.6; }
+  footer { background: var(--ink); border-top: 0.5px solid rgba(255,255,255,0.08); padding: 1.5rem clamp(1.5rem,5vw,4rem); display: flex; align-items: center; justify-content: space-between; }
+  footer p { font-family: var(--mono); font-size: 0.68rem; color: rgba(250,248,244,0.25); letter-spacing: 0.08em; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.25s; opacity: 0; }
+  .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  .delay-4 { animation-delay: 0.55s; opacity: 0; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 55vh; min-height: 340px; }
+    .skills-outer { grid-template-columns: 1fr; gap: 2rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .ach-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+  }
+
+.cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2rem}
+.cert-card{display:flex;align-items:center;gap:22px;border:1px solid #e5e5e5;border-radius:18px;padding:24px 30px;background:#fff}
+.cert-logo{width:60px;height:60px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;flex-shrink:0}
+.azure{background:#e8f0fb;color:#0066cc}.aws{background:#f8eddc;color:#8a5200}
+.ccna{background:#e8f0fb;color:#004ea8}.forage{background:#dff1ec;color:#00695c}
+.cert-content{flex:1}.cert-content p{color:#888}.cert-date{color:#999;white-space:nowrap}
+
+</style>
+</head>
+<body>
+<nav>
+<a class="nav-logo" href="#">Varshitha<em style="font-style:italic"> D.</em></a>
+<ul class="nav-links">
+<li><a href="#skills">Skills</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#education">Education</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#achievements">Achievements</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+<section class="hero" id="home" style="padding:0;">
+<div class="hero-left">
+<p class="hero-eyebrow fade-up">CS Engineering · B.Tech 2027</p>
+<h1 class="hero-name fade-up delay-1">Varshitha<br/><em>Darmini</em></h1>
+<p class="hero-tagline fade-up delay-2">Computer Science Engineering student at SR University with a CGPA of 9.5. Passionate about Artificial Intelligence, Machine Learning, Data Analytics, and Full Stack Development. Experienced in building intelligent applications and data-driven solutions that solve real-world problems.</p>
+<div class="hero-cta-row fade-up delay-3">
+<a class="btn-primary" href="https://github.com/VarshithaDarmini" rel="noopener" target="_blank">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        GitHub
+      </a>
+<a class="btn-secondary" href="mailto:varshithadarmini27@gmail.com">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="m22 7-10 7L2 7"></path></svg>
+        Get in Touch
+      </a>
+</div>
+<div class="hero-stats fade-up delay-4">
+<div class="stat-item"><span class="stat-num">9.5</span><span class="stat-label">CGPA</span></div>
+<div class="stat-item"><span class="stat-num">9</span><span class="stat-label">Projects</span></div>
+<div class="stat-item"><span class="stat-num">Top 1%</span><span class="stat-label">of Batch</span></div>
+</div>
+</div>
+</section>
+<section class="skills-section" id="skills">
+<div class="section-header">
+<p class="section-eyebrow">Skills</p>
+<h2 class="section-title">Technical <em>expertise</em></h2>
+</div>
+<div class="skills-outer">
+<div class="skills-intro">
+<p>I work across the full spectrum of modern software — from training neural networks and building ML pipelines, to architecting distributed systems and shipping responsive web applications. My focus is always on writing clean, purposeful code that solves real problems.</p>
+</div>
+<div class="skills-cluster">
+<div>
+<div class="skill-group-title">Languages</div>
+<div class="skill-tags">
+<span class="skill-tag accent">Python</span>
+<span class="skill-tag">Java</span>
+<span class="skill-tag">JavaScript</span>
+<span class="skill-tag">HTML</span>
+<span class="skill-tag">CSS</span>
+</div>
+</div>
+<div>
+<div class="skill-group-title">AI / ML</div>
+<div class="skill-tags">
+<span class="skill-tag accent">Machine Learning</span>
+<span class="skill-tag">Deep Learning</span>
+<span class="skill-tag">TensorFlow</span>
+<span class="skill-tag">Scikit-learn</span>
+<span class="skill-tag">Computer Vision</span>
+</div>
+</div>
+<div>
+<div class="skill-group-title">Data Analytics</div>
+<div class="skill-tags">
+<span class="skill-tag">Data Analysis</span>
+<span class="skill-tag">Pandas</span>
+<span class="skill-tag">NumPy</span>
+<span class="skill-tag">Data Visualization</span>
+<span class="skill-tag">EDA</span>
+</div>
+</div>
+<div>
+<div class="skill-group-title">Web Development</div>
+<div class="skill-tags">
+<span class="skill-tag">Flask</span>
+<span class="skill-tag">Django</span>
+<span class="skill-tag">REST APIs</span>
+</div>
+</div>
+<div>
+<div class="skill-group-title">Databases</div>
+<div class="skill-tags">
+<span class="skill-tag">MySQL</span>
+<span class="skill-tag">SQLite</span>
+</div>
+</div>
+<div>
+<div class="skill-group-title">Cloud &amp; Tools</div>
+<div class="skill-tags">
+<span class="skill-tag">Azure AI</span>
+<span class="skill-tag">AWS</span>
+<span class="skill-tag">Git/GitHub</span>
+</div>
+</div>
+<div>
+<div class="skill-group-title">Networking</div>
+<div class="skill-tags">
+<span class="skill-tag">Socket Programming</span>
+<span class="skill-tag">TCP/IP</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="exp-section" id="experience">
+<div class="section-header">
+<p class="section-eyebrow">Experience</p>
+<h2 class="section-title">Where I've <em>worked</em></h2>
+</div>
+<div class="exp-card">
+<div>
+<p class="exp-role">AI &amp; ML Intern</p>
+<p class="exp-org">AICTE – EduSkills Foundation</p>
+<ul class="exp-bullets">
+<li>Implemented and evaluated machine learning models in Python for classification and predictive analytics, ensuring reliable performance across diverse datasets.</li>
+<li>Applied data preprocessing, feature engineering, and model optimization techniques to improve prediction accuracy and generate actionable business insights.</li>
+</ul>
+</div>
+<div class="exp-period">Jul 2024<br/>→<br/>Sep 2024</div>
+</div>
+</section>
+<section id="education">
+<div class="section-header">
+<p class="section-eyebrow">Education</p>
+<h2 class="section-title">Academic <em>background</em></h2>
+</div>
+<div class="edu-grid">
+<div class="edu-card primary">
+<p class="edu-period">Aug 2023 – Jul 2027</p>
+<p class="edu-inst">SR University</p>
+<p class="edu-degree">B.Tech in Computer Science Engineering<br/>Warangal, India</p>
+<span class="edu-badge green">CGPA 9.5 / 10.0</span>
+</div>
+<div class="edu-card secondary">
+<p class="edu-period">2020 – 2022</p>
+<p class="edu-inst">Sri Chaitanya</p>
+<p class="edu-degree">Intermediate · Higher Secondary<br/>Science Stream</p>
+<span class="edu-badge gold">98%</span>
+</div>
+<div class="edu-card tertiary">
+<p class="edu-period">Completed</p>
+<p class="edu-inst">Greenwood High School</p>
+<p class="edu-degree">Secondary School Education</p>
+<span class="edu-badge gray">89%</span>
+</div>
+</div>
+</section>
+<section class="projects-section" id="projects">
+<div class="section-header">
+<p class="section-eyebrow">Projects</p>
+<h2 class="section-title">Things I've <em>built</em></h2>
+</div>
+<div class="projects-grid"><div class="project-card"><p class="project-number">01 · Banking / Data Analytics</p><div class="project-tech-cluster"><span class="project-tech">Python</span></div><h3 class="project-name">Banking Customer Segment Performance Evaluation</h3><p class="project-desc">Python-based analysis of banking customer segments and their performance, organized to support comparison of customer groups and business insights.</p><a class="project-link" href="https://github.com/VarshithaDarmini/Banking-Customer-Segment-Performance-Evaluation" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">02 · Trading Platform</p><div class="project-tech-cluster"><span class="project-tech">Python</span></div><h3 class="project-name">Digital Electronic Trading Platform</h3><p class="project-desc">A Python project focused on an electronic trading platform, bringing trading-related functionality into a digital application.</p><a class="project-link" href="https://github.com/VarshithaDarmini/Digital-Electronic-Trading-Platform" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">03 · Smart City / Machine Learning</p><div class="project-tech-cluster"><span class="project-tech">Python</span><span class="project-tech ml">Random Forest</span><span class="project-tech web">Flask</span><span class="project-tech">Jupyter Notebook</span></div><h3 class="project-name">UrbanPulse — Smart City Air Quality Analytics</h3><p class="project-desc">A smart-city air-quality analytics platform built with Flask, Python, and Random Forest. It supports air-quality analysis, interactive data visualization, and city-wise pollution comparison.</p><a class="project-link" href="https://github.com/VarshithaDarmini/UrbanPulse-Smart-City-Air-Quality-Analytics" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">04 · Agricultural Data Analytics</p><div class="project-tech-cluster"><span class="project-tech">Python</span></div><h3 class="project-name">Agricultural Commodity Market Insights</h3><p class="project-desc">A Python project focused on agricultural commodity markets, providing a foundation for exploring market data and deriving useful insights.</p><a class="project-link" href="https://github.com/VarshithaDarmini/Agricultural-Commodity-Market-Insights" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">05 · Collections / Recovery Analytics</p><div class="project-tech-cluster"><span class="project-tech">Jupyter Notebook</span></div><h3 class="project-name">Credresolve — Collections Recovery Analytics</h3><p class="project-desc">A notebook-based analytics project centered on collections and recovery performance, supporting data exploration and analysis of recovery-related trends.</p><a class="project-link" href="https://github.com/VarshithaDarmini/Credresolve-Collections-Recovery-Analytics" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">06 · Healthcare / AI</p><div class="project-tech-cluster"><span class="project-tech ml">AI</span><span class="project-tech health">Medicine Intelligence</span><span class="project-tech web">Pharmacy Search</span></div><h3 class="project-name">AI-Powered Medicine Intelligence and Pharmacy Search</h3><p class="project-desc">An AI-focused medicine intelligence and pharmacy search project designed to help users explore medicine-related information and pharmacy options.</p><a class="project-link" href="https://github.com/VarshithaDarmini/AI-Powered-Medicine-Intelligence-and-Pharmacy-Search" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">08 · Web Development</p><div class="project-tech-cluster"><span class="project-tech web">HTML</span><span class="project-tech web">CSS</span><span class="project-tech web">JavaScript</span></div><h3 class="project-name">Heavy Mettle — Fitness &amp; Gym Website</h3><p class="project-desc">A responsive fitness and gym website featuring workout programs, gym facilities, trainer information, and membership registration through an engaging, user-friendly interface.</p><a class="project-link" href="https://github.com/VarshithaDarmini/Heavy-Mettle-Fitness-Website" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">09 · Healthcare / Machine Learning</p><div class="project-tech-cluster"><span class="project-tech ml">Logistic Regression</span><span class="project-tech ml">Random Forest</span><span class="project-tech ml">SVM</span></div><h3 class="project-name">Gluco Risk Analyzer</h3><p class="project-desc">A machine-learning-based diabetes risk prediction system using Logistic Regression, Random Forest, and SVM to support early detection and healthcare decision-making.</p><a class="project-link" href="https://github.com/VarshithaDarmini/Gluco-Risk-Analyzer" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div><div class="project-card"><p class="project-number">10 · HPC / E-Commerce Analytics</p><div class="project-tech-cluster"><span class="project-tech hpc">Python</span><span class="project-tech hpc">HPC</span><span class="project-tech">E-Commerce Analytics</span></div><h3 class="project-name">HPC-Based Seasonal Trend Analysis for E-Commerce</h3><p class="project-desc">A centralized e-commerce analytics system that processes customer purchase data from multiple clients over an IP-based network communication setup.</p><a class="project-link" href="https://github.com/VarshithaDarmini/HPC-Based-Seasonal-Trend-Analysis-for-E-Commerce" rel="noopener" target="_blank">View on GitHub<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a></div></div>
+</section>
+<section id="achievements">
+<div class="section-header">
+<p class="section-eyebrow">ACHIEVEMENTS &amp; CERTIFICATIONS</p>
+<h2 class="section-title">Achievements &amp; <em>Certifications</em></h2>
+</div>
+<div class="ach-grid">
+<div class="ach-card"><div class="ach-icon gold">🏆</div><div class="ach-title">Academic Excellence Award</div><div class="ach-sub">Top 1% in B.Tech CSE (2025–26).</div></div>
+<div class="ach-card"><div class="ach-icon green">🧩</div><div class="ach-title">NPTEL Elite</div><div class="ach-sub">The Joy of Computing Using Python (IIT Madras).</div></div>
+<div class="ach-card"><div class="ach-icon blue">⚡</div><div class="ach-title">Hackathons &amp; Innovation Challenges</div><div class="ach-sub">Active participation from 2023–2025.</div></div>
+</div>
+<div class="cert-grid">
+<div class="cert-card"><div class="cert-logo azure">Azure</div><div class="cert-content"><h3>Microsoft Certified: Azure AI Fundamentals</h3><p>Microsoft Certified</p></div><div class="cert-date">Sep 2025</div></div>
+<div class="cert-card"><div class="cert-logo aws">AWS</div><div class="cert-content"><h3>AWS Academy Cloud Foundations</h3><p>AWS Academy</p></div><div class="cert-date">Mar 2025</div></div>
+<div class="cert-card"><div class="cert-logo ccna">CCNA</div><div class="cert-content"><h3>CCNA: Introduction to Networks</h3><p>Cisco Networking Academy</p></div><div class="cert-date">Nov 2024</div></div>
+<div class="cert-card"><div class="cert-logo forage">Forage</div><div class="cert-content"><h3>Data Analytics &amp; Visualization Simulation</h3><p>Forage Virtual Experience</p></div><div class="cert-date">Feb 2025</div></div>
+</div>
+</section>
+<section class="contact-section" id="contact">
+<div class="section-header" style="margin-bottom:1.5rem;">
+<p class="section-eyebrow" style="justify-content:center;">Contact</p>
+<h2 class="section-title">Contact <em>Me</em></h2>
+</div>
+<p class="contact-sub">Open to internships, research collaborations, and interesting projects.</p>
+<div class="contact-links">
+<a class="contact-link" href="mailto:varshithadarmini27@gmail.com">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="m22 7-10 7L2 7"></path></svg>
+      varshithadarmini27@gmail.com
+    </a>
+<a class="contact-link" href="https://www.linkedin.com/in/varshitha-darmini-713035344" rel="noopener" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect height="12" width="4" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      LinkedIn
+    </a>
+<a class="contact-link" href="https://github.com/VarshithaDarmini" rel="noopener" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+      GitHub
+    </a>
+<a class="contact-link" href="tel:+918465014620">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.62 2H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.45 9.45a16 16 0 0 0 6.1 6.1l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      +91 84650 14620
+    </a>
+</div>
+</section>
+<footer>
+<p>© 2026 Varshitha Darmini · Built with care</p>
+<p>B.Tech CSE · SR University · Warangal</p>
+</footer>
+</body>
+</html>
